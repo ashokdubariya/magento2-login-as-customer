@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Admin Menu Configuration
+ *
+ * @category  Ashokkumar
+ * @package   Ashokkumar_LoginAsCustomer
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ashokkumar_LoginAsCustomer::audit_log"
+             title="Login as Customer - Admin Login Log"
+             module="Ashokkumar_LoginAsCustomer"
+             sortOrder="100"
+             parent="Magento_Customer::customer"
+             action="loginascustomer/audit/index"
+             resource="Ashokkumar_LoginAsCustomer::audit_log"/>
+    </menu>
+</config>

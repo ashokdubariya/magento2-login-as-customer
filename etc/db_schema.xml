@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Database Schema for LoginAsCustomer Audit Log
+ *
+ * @category  Ashokkumar
+ * @package   Ashokkumar_LoginAsCustomer
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    
+    <table name="ashokkumar_login_as_customer_log" resource="default" engine="innodb"
+           comment="Login As Customer Audit Log Table">
+        
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        
+        <column xsi:type="int" name="admin_id" unsigned="true" nullable="false"
+                comment="Admin User ID"/>
+        
+        <column xsi:type="varchar" name="admin_username" nullable="false" length="255"
+                comment="Admin Username"/>
+        
+        <column xsi:type="int" name="customer_id" unsigned="true" nullable="false"
+                comment="Customer ID"/>
+        
+        <column xsi:type="varchar" name="customer_email" nullable="false" length="255"
+                comment="Customer Email"/>
+        
+        <column xsi:type="varchar" name="token_hash" nullable="false" length="64"
+                comment="SHA-256 Token Hash"/>
+        
+        <column xsi:type="varchar" name="ip_address" nullable="true" length="45"
+                comment="Admin IP Address (IPv4/IPv6)"/>
+        
+        <column xsi:type="varchar" name="status" nullable="false" length="20" default="pending"
+                comment="Status: pending, success, expired, failed"/>
+        
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false"
+                comment="Store View ID"/>
+        
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false"
+                default="CURRENT_TIMESTAMP" comment="Created At"/>
+        
+        <column xsi:type="timestamp" name="expires_at" on_update="false" nullable="false"
+                comment="Token Expiry Time"/>
+        
+        <column xsi:type="timestamp" name="used_at" on_update="false" nullable="true"
+                comment="Token Used At"/>
+        
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        
+        <constraint xsi:type="foreign" referenceId="FK_ROAMGUARD_LAC_LOG_ADMIN_ID"
+                    table="ashokkumar_login_as_customer_log" column="admin_id"
+                    referenceTable="admin_user" referenceColumn="user_id" onDelete="CASCADE"/>
+        
+        <constraint xsi:type="foreign" referenceId="FK_ROAMGUARD_LAC_LOG_CUSTOMER_ID"
+                    table="ashokkumar_login_as_customer_log" column="customer_id"
+                    referenceTable="customer_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+        
+        <constraint xsi:type="foreign" referenceId="FK_ROAMGUARD_LAC_LOG_STORE_ID"
+                    table="ashokkumar_login_as_customer_log" column="store_id"
+                    referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        
+        <index referenceId="ROAMGUARD_LAC_LOG_ADMIN_ID" indexType="btree">
+            <column name="admin_id"/>
+        </index>
+        
+        <index referenceId="ROAMGUARD_LAC_LOG_CUSTOMER_ID" indexType="btree">
+            <column name="customer_id"/>
+        </index>
+        
+        <index referenceId="ROAMGUARD_LAC_LOG_TOKEN_HASH" indexType="btree">
+            <column name="token_hash"/>
+        </index>
+        
+        <index referenceId="ROAMGUARD_LAC_LOG_STATUS" indexType="btree">
+            <column name="status"/>
+        </index>
+        
+        <index referenceId="ROAMGUARD_LAC_LOG_CREATED_AT" indexType="btree">
+            <column name="created_at"/>
+        </index>
+        
+    </table>
+</schema>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * ACL Configuration - Access Control List
+ *
+ * @category  Ashokkumar
+ * @package   Ashokkumar_LoginAsCustomer
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Customer::customer" title="Customers" sortOrder="40">
+                    <resource id="Ashokkumar_LoginAsCustomer::login_as_customer"
+                              title="Login as Customer"
+                              sortOrder="900">
+                        <resource id="Ashokkumar_LoginAsCustomer::login_action"
+                                  title="Perform Login as Customer Action"
+                                  sortOrder="10"/>
+                        <resource id="Ashokkumar_LoginAsCustomer::audit_log"
+                                  title="View Audit Log"
+                                  sortOrder="20"/>
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Ashokkumar_LoginAsCustomer::config"
+                                      title="Login as Customer Configuration"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

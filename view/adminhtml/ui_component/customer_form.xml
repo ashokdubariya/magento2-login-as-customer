@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @category  Ashokkumar
+ * @package   Ashokkumar_LoginAsCustomer
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <settings>
+        <buttons>
+            <button name="loginascustomer" class="Ashokkumar\LoginAsCustomer\Ui\Customer\Component\Control\LoginAsCustomerButton"/>
+        </buttons>
+    </settings>
+</form>

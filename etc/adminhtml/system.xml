@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * System Configuration
+ *
+ * @category  Ashokkumar
+ * @package   Ashokkumar_LoginAsCustomer
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="ashokkumar" translate="label" sortOrder="400">
+            <label>Ashokkumar</label>
+        </tab>
+        
+        <section id="ashokkumar_loginascustomer" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Login as Customer</label>
+            <tab>ashokkumar</tab>
+            <resource>Ashokkumar_LoginAsCustomer::config</resource>
+            
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Module</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable/Disable Login as Customer functionality</comment>
+                </field>
+                
+                <field id="token_lifetime" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Token Lifetime (minutes)</label>
+                    <validate>validate-number validate-greater-than-zero</validate>
+                    <comment>How long the login token remains valid (default: 5 minutes)</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                
+                <field id="redirect_page" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Redirect Page After Login</label>
+                    <comment>URL path to redirect after successful login (e.g., customer/account, checkout/cart). Default: customer/account</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                
+                <field id="audit_enabled" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Audit Logging</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Log all login attempts in audit log (recommended for security)</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
